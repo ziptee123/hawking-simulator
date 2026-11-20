@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>霍金模擬器</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: #eaf3fc;
+}
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #eaf3fc;
+  transition: none;
+}
+
+.screen.tilted {
+  /* 直接旋轉 30 度 */
+  transform: rotate(-30deg);
+  transform-origin: center center;
+}
+
+.card {
+  width: min(90%, 640px);
+  padding: 65px 45px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid #e1eaf4;
+  border-radius: 42px;
+  box-shadow: 0 25px 65px rgba(42,76,115,.13);
+  text-align: center;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: 5px;
+  color: #263e60;
+}
+
+.line {
+  width: 55px;
+  height: 2px;
+  background: #9bb8d7;
+  margin: 20px auto 55px;
+}
+
+.start-btn {
+  width: 90%;
+  padding: 23px;
+  border: none;
+  border-radius: 50px;
+  background: #304f76;
+  color: white;
+  font-size: 19px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.start-btn:hover {
+  background: #416b9d;
+  transform: translateY(-2px);
+}
+
+.quote {
+  position: absolute;
+  bottom: 45px;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  color: #819bb8;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+.quote small {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.reset-btn {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 25px;
+  border: 1px solid #a9c1db;
+  border-radius: 30px;
+  color: #304f76;
+  background: white;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: .4s;
+}
+
+.reset-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 55px 20px;
+    border-radius: 30px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .line {
+    margin-bottom: 45px;
+  }
+
+  .start-btn {
+    font-size: 17px;
+  }
+
+  .screen.tilted {
+    transform: perspective(800px)
+      rotateY(-13deg)
+      rotateZ(-3deg)
+      scale(.9)
+      translateX(5vw);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="screen" id="screen">
+
+  <section class="card">
+    <h1>霍金模擬器</h1>
+
+    <div class="line"></div>
+
+    <button class="start-btn" id="start">
+      點擊開始體驗
+    </button>
+  </section>
+
+  <button class="reset-btn" id="reset">
+    恢復正常
+  </button>
+
+  <footer class="quote">
+    "Look up at the stars and not down at your feet."
+    <small>— STEPHEN HAWKING</small>
+  </footer>
+
+</main>
+
+<script>
+const screen = document.getElementById("screen");
+const start = document.getElementById("start");
+const reset = document.getElementById("reset");
+
+start.addEventListener("click", () => {
+  screen.classList.add("tilted");
+  reset.classList.add("show");
+});
+
+reset.addEventListener("click", () => {
+  screen.classList.remove("tilted");
+  reset.classList.remove("show");
+});
+</script>
+
+</body>
+</html>
